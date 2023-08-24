@@ -155,7 +155,7 @@ session_start();
                 <p class="d-inline-block bg-secondary text-primary py-1 px-4">Listagem de Sessões</p>
                 <h1 class="text-uppercase">Veja as Sessões Atuais</h1>
             </div>
-            <div class="row">
+            <div class="row text-center">
                 <div class="col-md-3 mx-auto mb-4">
                     <label for="filmeSessao" class="form-label">Escolha um Filme</label>
                     <select class="form-select bg-dark text-white" id="filmeSessao" onchange="filtraSessoes()">
