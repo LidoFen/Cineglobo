@@ -5,6 +5,10 @@ Cineglobo
 
 https://cineglobo.000webhostapp.com/
 
+
+Template made by HTML Codex, edited by me
+
+
 As part of a given assignment for vacations, the online version is slightly different to prevent unwanted registos and to connect to the now hosted DB:
 
 
