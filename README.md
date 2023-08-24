@@ -7,8 +7,8 @@ https://cineglobo.000webhostapp.com/
 
 As part of a given assignment for vacations, the online version is slightly different to prevent unwanted registos and to connect to the now hosted DB:
 
-Taking the MoviesDB database into account, you should develop the following features in your system
-functionalities: 
+Taking the MoviesDB database into account, you should develop the following features in your system functionalities: 
+
 1 - Create a user register
 2 - System login 
 3 - Registration of movies with the possibility of editing or removing movies. 
