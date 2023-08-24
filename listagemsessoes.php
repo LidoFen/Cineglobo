@@ -156,7 +156,7 @@ session_start();
                 <h1 class="text-uppercase">Veja as Sessões Atuais</h1>
             </div>
             <div class="row">
-                <div class="col-3 mx-auto mb-4">
+                <div class="col-md-3 mx-auto mb-4">
                     <label for="filmeSessao" class="form-label">Escolha um Filme</label>
                     <select class="form-select bg-dark text-white" id="filmeSessao" onchange="filtraSessoes()">
         
