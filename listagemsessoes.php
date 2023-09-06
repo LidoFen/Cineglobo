@@ -23,7 +23,6 @@ session_start();
     <link rel="stylesheet" href="css/datatables.css">
     <script src="js/lib/sweetalert.js"></script>
     <script src="js/filme.js"></script>
-    <script src="js/sala.js"></script>
     <script src="js/cinema.js"></script>
     <script src="js/sessao.js"></script>
     <script src="js/utilizador.js"></script>
@@ -172,6 +171,8 @@ session_start();
                         <th scope="col">Filme</th>
                         <th scope="col">Sala</th>
                         <th scope="col">Horário</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Remover</th>
                     </tr>
                 </thead>
                 <tbody id="listaSessoes">
@@ -255,13 +256,64 @@ session_start();
     </div>
     <!-- Footer End -->
 
+    <div class="modal fade" id="modalSessao" tabindex="-1" aria-labelledby="modalSessaoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="background-color: #191C24;">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalSessaoLabel">Edição de Sessão</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="card" style="border: black;">
+                            <h5 class="card-header" style="background-color: #191C24;">Edite aqui as informações da Sessão</h5>
+                            <div class="card-body" style="background-color: #1f2127;">
+                                <form class="row g-3">
+                                    <div class="col-8">
+                                        <label for="descricaoSessaoEdit" class="form-label">Descrição</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="descricaoSessaoEdit">
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="cinemaSessaoEdit" class="form-label">Escolha um Cinema</label>
+                                        <select class="form-select bg-dark text-white" id="cinemaSessaoEdit">
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="filmeSessaoEdit" class="form-label">Escolha um Filme</label>
+                                        <select class="form-select bg-dark text-white" id="filmeSessaoEdit">
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="salaSessaoEdit" class="form-label">Escolha uma Sala</label>
+                                        <select class="form-select bg-dark text-white" id="salaSessaoEdit">
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="horarioSessaoEdit" class="form-label">Horário</label>
+                                        <input type="datetime-local" class="form-control bg-dark text-white" id="horarioSessaoEdit">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardar1">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>

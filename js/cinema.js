@@ -41,6 +41,7 @@ function getCinemas() {
 
         .done(function (msg) {
             $('#cinemaSessao').html(msg);
+            $('#cinemaSessaoEdit').html(msg);
 
         })
 
@@ -67,6 +68,7 @@ function getSalas() {
 
         .done(function (msg) {
             $('#salaSessao').html(msg);
+            $('#salaSessaoEdit').html(msg);
 
         })
 
@@ -125,6 +127,10 @@ function getListaCinemas() {
 
     let dados = new FormData();
     dados.append("op", 3);
+
+    if ($.fn.DataTable.isDataTable('#tabelaCinemas')) {
+        $('#tabelaCinemas').DataTable().destroy();
+    }
 
     $.ajax({
         url: "controller/controllerCinema.php",

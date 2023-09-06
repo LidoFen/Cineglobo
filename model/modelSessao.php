@@ -42,6 +42,7 @@ class Sessao {
 
         global $conn;
         $msg = "";
+        session_start();
     
         $sql = "SELECT sessao.id, sessao.descricao, cinema.nome AS nomeCinema, filme.nome AS nomeFilme, sala.descricao AS nomeSala, sessao.horario
                 FROM sessao, cinema, filme, sala 
@@ -58,10 +59,26 @@ class Sessao {
                 $msg .= "<td>".$row['nomeFilme']."</td>";
                 $msg .= "<td>".$row['nomeSala']."</td>";
                 $msg .= "<td>".$row['horario']."</td>";
+
+
+                if(isset($_SESSION['tipoUtilizador']) && ($_SESSION['tipoUtilizador'] == 1 || $_SESSION['tipoUtilizador'] == 2)) {
+                    $msg .= "<td><button class='btn btn-warning' onclick = 'getDadosSessao(".$row['id'].")'><i class='bi bi-pencil-fill'></i></button></td>";
+                } else {
+                    $msg .= "<td>Sem permissão!</td>"; 
+                }
+    
+                if(isset($_SESSION['tipoUtilizador']) && $_SESSION['tipoUtilizador'] == 1) {
+                    $msg .= "<td><button class='btn btn-danger' onclick = 'removerSessao(".$row['id'].")'><i class='bi bi-trash-fill'></i></button></td>";
+                } else {
+                    $msg .= "<td>Sem permissão!</td>";
+                }
+
                 $msg .= "</tr>";
             }
         } else {
             $msg .= "<tr>";
+            $msg .= "<td>N/D</td>";
+            $msg .= "<td>N/D</td>";
             $msg .= "<td>N/D</td>";
             $msg .= "<td>N/D</td>";
             $msg .= "<td>N/D</td>";
@@ -118,6 +135,90 @@ class Sessao {
         $conn->close();
     
         return ($msg);
+    }
+
+    function removerSessao($id) {
+        global $conn;
+
+        $msg = "";
+        $sql = "DELETE FROM sessao WHERE id = ".$id;
+        $flag = true;
+
+        if ($conn->query($sql) === TRUE) {
+            $msg = "Sessao removida com sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+          
+        $conn->close();
+
+        $res = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+
+        return ($res);
+    }
+
+    function getDadosSessao($id){
+    
+        global $conn;
+
+        $conn->set_charset("utf8");
+        
+        $row = "";
+        $msg = "";
+
+
+    
+        $sql = "SELECT * FROM sessao WHERE id = ".$id;
+        $result = $conn->query($sql);
+
+    
+        if ($result->num_rows > 0) {
+            // output data of each row
+            $row = $result->fetch_assoc();
+    
+        }
+
+    
+        $conn->close();
+    
+        $result = $row;
+    
+        return json_encode($result);
+    }
+
+    function guardaEditSessao($id, $descricao, $cinema, $filme, $sala, $horario){
+
+        global $conn;
+        $msg = "";
+        $flag = true;
+
+        $horario = str_replace(['T'], [', '], $horario);
+        $horario .= 'm';
+
+        $sql = "UPDATE sessao SET descricao = '".$descricao."', idCinema = '".$cinema."', idFilme = '".$filme."', idSala = '".$sala."', horario = '".$horario."' WHERE id = ".$id;
+
+        if ($conn->query($sql) === TRUE) {
+            $msg = "Alterado com sucesso";
+
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+          
+        $conn->close();
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+
+        return ($resp);
+
+
     }
 }
 
