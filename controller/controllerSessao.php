@@ -22,8 +22,31 @@ if ($_POST['op'] == 1) {
 
 }else if($_POST['op'] == 3){
     $filmeId = $_POST['filmeId'];
-    $res = $sessao->filtrarSessoes($filmeId);
+    $res = $sessao -> filtrarSessoes($filmeId);
     echo($res);
+}else if($_POST['op'] == 4){
+
+    $res = $sessao -> removerSessao($_POST['id']);
+    echo($res);
+
+}else if($_POST['op'] == 5){
+
+    $res = $sessao -> getDadosSessao($_POST['id']);
+    echo($res);
+
+}else if($_POST['op'] == 6){
+
+    $res = $sessao -> guardaEditSessao(
+        $_POST['id'],
+        $_POST['descricao'],
+        $_POST['cinema'],
+        $_POST['filme'],
+        $_POST['sala'],
+        $_POST['horario']
+    );
+
+    echo($res);
+
 }
 
 

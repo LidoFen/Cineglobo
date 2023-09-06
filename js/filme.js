@@ -43,6 +43,7 @@ function getFilmes() {
 
         .done(function (msg) {
             $('#filmeSessao').html(msg);
+            $('#filmeSessaoEdit').html(msg);
 
         })
 
@@ -88,7 +89,7 @@ function registaFilme() {
                 const cartazPreview = document.getElementById('cartazPreview');
                 const cartazInput = document.getElementById('cartazFilme');
 
-                cartazInput.value = ''; // Clear the file input
+                cartazInput.value = '';
                 cartazPreview.src = '#';
                 cartazPreview.style.display = 'none';
 
@@ -123,7 +124,7 @@ function carregarDadosFilmes() {
         });
 }
 
-function mostrarItems(filmes) {
+function mostrarItems(filmes) { //mostra filmes registado e pesquisa
     const containerFilme = $("#listaFilmes");
     const barraPesquisa = $("#barraPesquisa");
 
@@ -360,7 +361,7 @@ function infoFilme(id) {
 }
 
 
-function abrirTrailer(filmeNome) {
+function abrirTrailer(filmeNome) { // trailer filmes
     const chaveApi = 'AIzaSyCKPdT47f_Tq2Hsq_DvRzmG7n5kTMelka0'; // chave api
     const pesquisa = encodeURIComponent(filmeNome + ' official trailer'); // o que pesquisar
     const urlApi = `https://www.googleapis.com/youtube/v3/search?key=${chaveApi}&part=snippet&q=${pesquisa}&maxResults=1&type=video`; // endereço onde aplicar a chave e pesquisa

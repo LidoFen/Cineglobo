@@ -121,18 +121,18 @@ class Cinema {
                 $msg .= "<td>".$row['telefone']."</td>";
                 $msg .= "<td>".$row['email']."</td>";
     
-                // Only show the edit button for tipoUtilizador 1 or 2
+                
                 if(isset($_SESSION['tipoUtilizador']) && ($_SESSION['tipoUtilizador'] == 1 || $_SESSION['tipoUtilizador'] == 2)) {
                     $msg .= "<td><button class='btn btn-warning' onclick = 'getDadosCinema(".$row['id'].")'><i class='bi bi-pencil-fill'></i></button></td>";
                 } else {
-                    $msg .= "<td>Sem permissão!</td>"; // Empty cell if not allowed to edit
+                    $msg .= "<td>Sem permissão!</td>"; 
                 }
     
-                // Show the remove button for tipoUtilizador 1
+                
                 if(isset($_SESSION['tipoUtilizador']) && $_SESSION['tipoUtilizador'] == 1) {
                     $msg .= "<td><button class='btn btn-danger' onclick = 'removerCinema(".$row['id'].")'><i class='bi bi-trash-fill'></i></button></td>";
                 } else {
-                    $msg .= "<td>Sem permissão!</td>"; // Empty cell if not allowed to remove
+                    $msg .= "<td>Sem permissão!</td>";
                 }
     
                 $msg .= "</tr>";

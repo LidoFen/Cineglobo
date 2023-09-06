@@ -73,10 +73,10 @@ function getListaSessoes() {
 
 
 function filtraSessoes() {
-    var selectedFilmId = $("#filmeSessao").val(); // Get the selected film's ID
+    var selectedFilmId = $("#filmeSessao").val(); 
     
     let dados = new FormData();
-    dados.append("op", 3); // Add an operation code to your server-side code
+    dados.append("op", 3); 
     dados.append("filmeId", selectedFilmId);
 
 
@@ -100,7 +100,108 @@ function filtraSessoes() {
     });
 }
 
+function removerSessao(id) {
 
+    let dados = new FormData();
+    dados.append("op", 4);
+    dados.append("id", id);
+
+    $.ajax({
+        url: "controller/controllerSessao.php",
+        method: "POST",
+        data: dados,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+
+        .done(function (msg) {
+
+            let obj = JSON.parse(msg);
+            if (obj.flag) {
+                alerta("Sucesso", obj.msg, "success");
+                getListaSessoes();
+            } else {
+                alerta("Erro", obj.msg, "error");
+            }
+
+        })
+
+        .fail(function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+}
+
+function getDadosSessao(id) {
+
+    let dados = new FormData();
+    dados.append("op", 5);
+    dados.append("id", id);
+
+    $.ajax({
+        url: "controller/controllerSessao.php",
+        method: "POST",
+        data: dados,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+
+        .done(function (msg) {
+            let obj = JSON.parse(msg);
+            $('#descricaoSessaoEdit').val(obj.descricao);
+
+            $('#modalSessao').modal('show');
+
+            $('#btnGuardar1').attr("onclick", "guardaEdit(" + obj.id + ")")
+        })
+
+        .fail(function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+}
+
+function guardaEdit(id) {
+
+    let dados = new FormData();
+    dados.append("op", 6);
+    dados.append("id", id);
+    dados.append("descricao", $('#descricaoSessaoEdit').val());
+    dados.append("cinema", $('#cinemaSessaoEdit').val());
+    dados.append("filme", $('#filmeSessaoEdit').val());
+    dados.append("sala", $('#salaSessaoEdit').val());
+    dados.append("horario", $('#horarioSessaoEdit').val());
+
+    $.ajax({
+        url: "controller/controllerSessao.php",
+        method: "POST",
+        data: dados,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+
+        .done(function (msg) {
+
+            let obj = JSON.parse(msg);
+            if (obj.flag) {
+                alerta("Sucesso", obj.msg, "success");
+                $('#modalSessao').modal('hide');
+                getListaSessoes();
+
+            } else {
+                alerta("Erro", obj.msg, "error");
+            }
+
+        })
+
+        .fail(function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+}
 
 
 
